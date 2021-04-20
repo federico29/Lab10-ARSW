@@ -116,6 +116,7 @@ El tiempo promedio de respuesta es de 24,091 segundos
     * 1090000
 	![](images/1090000.png)
 	* Uso de CPU:
+	
 	![](images/useofcpu2.png)
 	
 	**Prueba II**: Carga concurrente. Siguen habiendo errores en algunas peticiones, pero el tiempo en que se atienden de disminuyó.
@@ -125,13 +126,14 @@ El tiempo promedio de respuesta es de 24,091 segundos
 	![](images/newmanresults2-2.png)
 	
 	* Uso de CPU:
+	
 	![](images/useofcpuconcurrent2.png)
 	
 13. Evaluación del escenario de calidad asociado al requerimiento no funcional de escalabilidad:
 
 Implementando esta estrategia de Escalamiento Vertical, se logró una disminución significativa, de al rededor 4 segundos, en los tiempos en que se atienden las peticiones no concurrentes, el tiempo
-pasó de 24,091 a 20,627 segundos. Mientras que realizando peticiones concurrentes no se logró de todo un mejoramiento en el requisito no funcional de escalabilidad, aunque el tiempo en que se atendieron bajó
-de 4m 19s a 3m 28s sigue habiendo errores en estas peticiones.
+pasó de 24,091 a 20,627 segundos. Mientras que realizando peticiones concurrentes no se logró del todo un mejoramiento en el requisito no funcional de escalabilidad, aunque el tiempo en que se atendieron bajó
+de 4m 19s a 3m 28s y el consumo de CPU es notablemente más bajo en ambos casos, como se ve en las imágenes, sigue habiendo errores en estas peticiones.
 
 **Preguntas**
 
