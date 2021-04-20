@@ -63,6 +63,8 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     * 1090000
 	![](images/1090000test.png)
 
+El tiempo promedio de respuesta es de 24,091 segundos
+
 9. Consumo de CPU luego de las pruebas:
 
 ![](images/useofcpu.png)
