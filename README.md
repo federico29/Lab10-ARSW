@@ -71,8 +71,7 @@ El tiempo promedio de respuesta es de 24,091 segundos
 
 10. Simulación de carga concurrente a nuestro sistema:
     ```
-    newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
-    newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
+    newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 & newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
     ```
 	
 	![](images/newmanexecution.png)
@@ -88,9 +87,51 @@ El tiempo promedio de respuesta es de 24,091 segundos
 
 ![](images/useofcpuconcurrent.png)
 
-12. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
-13. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
-14. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
+12. Realizando una estrategia de Escalamiento Vertical, se cambió el tamaño de la máquina de B1ls a B2ms:
+
+![](images/newsize.png)
+
+13. Una vez el cambio se vea reflejado, se repitieron los pasos 8, 9 y 10.
+
+	**Prueba I**: El promedio bajó de 24,091 a 20,627 segundos.
+
+	* 1000000
+	![](images/1000000.png)
+    * 1010000
+	![](images/1010000.png)
+    * 1020000
+	![](images/1020000.png)
+    * 1030000
+	![](images/1030000.png)
+    * 1040000
+	![](images/1040000.png)
+    * 1050000
+	![](images/1050000.png)
+    * 1060000
+	![](images/1060000.png)
+    * 1070000
+	![](images/1070000.png)
+    * 1080000
+	![](images/1080000.png)
+    * 1090000
+	![](images/1090000.png)
+	* Uso de CPU:
+	![](images/useofcpu2.png)
+	
+	**Prueba II**: Carga concurrente. Siguen habiendo errores en algunas peticiones, pero el tiempo en que se atienden de disminuyó.
+	
+	![](images/newmanresults2-1.png)
+	
+	![](images/newmanresults2-2.png)
+	
+	* Uso de CPU:
+	![](images/useofcpuconcurrent2.png)
+	
+13. Evaluación del escenario de calidad asociado al requerimiento no funcional de escalabilidad:
+
+Implementando esta estrategia de Escalamiento Vertical, se logró una disminución significativa, de al rededor 4 segundos, en los tiempos en que se atienden las peticiones no concurrentes, el tiempo
+pasó de 24,091 a 20,627 segundos. Mientras que realizando peticiones concurrentes no se logró de todo un mejoramiento en el requisito no funcional de escalabilidad, aunque el tiempo en que se atendieron bajó
+de 4m 19s a 3m 28s sigue habiendo errores en estas peticiones.
 
 **Preguntas**
 
