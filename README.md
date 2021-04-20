@@ -1,5 +1,6 @@
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
+### Federico Barrios Meneses
 
 ## Escalamiento en Azure con Maquinas Virtuales, Sacale Sets y Service Plans
 
