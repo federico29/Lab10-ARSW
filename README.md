@@ -1,5 +1,6 @@
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
+### Federico Barrios Meneses
 
 ## Escalamiento en Azure con Maquinas Virtuales, Sacale Sets y Service Plans
 
@@ -16,7 +17,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![](images/vminfo.png)
 
-2. Conección a la máquina por ssh:
+2. Conexión a la máquina por ssh:
 
 ![](images/vmconnection.png)
 
@@ -28,11 +29,11 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![](images/installingfibonacciapp.png) 
 
-5. Instalando *forever* y usándolo para ejecutae la aplicación:
+5. Instalando *forever* y usándolo para ejecutar la aplicación:
 
 ![](images/installingfibonacciapp2.png)
 
-6. Creación de la regla de puerto de entrada*Inbound port rule*:
+6. Creación de la regla de puerto de entrada (*Inbound port rule*):
 
 ![](images/inboundportrule.png)
 
@@ -72,7 +73,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
     ```
 	
-	![](images/useofcpu.png)
+	![](images/newmanexecution.png)
 	
 	Resultados:
 	
