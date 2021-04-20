@@ -17,7 +17,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![](images/vminfo.png)
 
-2. Conección a la máquina por ssh:
+2. Conexión a la máquina por ssh:
 
 ![](images/vmconnection.png)
 
