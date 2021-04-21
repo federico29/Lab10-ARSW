@@ -138,9 +138,41 @@ de 4m 19s a 3m 28s y el consumo de CPU es notablemente más bajo en ambos casos,
 **Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
+
+Además de la máquina virtual, se crean los siguientes 6 recursos:
+
+![](images/vmresources.png)
+
 2. ¿Brevemente describa para qué sirve cada recurso?
+
+**Red virtual:** se encarga de la comunicación entre recursos de azure, cumple el mismo propósito que una red tradicional pero ofrece beneficios de Azure como escalabilidad y disponibilidad.
+
+**Dirección IP pública:** esta dirección es asignada a un recurso hasta que este se elimine y permite que los recursos de azure se comuniquen con internet y otros servicios públicos de azure.
+
+**Grupo de seguridad de red:** Permite definir reglas de entrada y salida que filtren el tráfico de red entrante o saliente de varios tipos de recursos de Azure.
+
+**Interfaz de red:** permite que una máquina virtual Azure se comunique con internet y con recursos locales.
+
+**Clave ssh:** es una clave que solo se puede obtener al momento de crear la máquina o se puede usar una ya existente, sirve para permitir la conexión ssh desde equipos externos.
+
+**Disco:** es el almacenamiento de la máquina virtual de Azure.
+
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
+
+Al estar conectados a la máquina virtual mediante SSH, los procesos que ejecutemos serán, por llamarlos de alguna manera, "procesos de instancia" relacionados a esa conexión, por lo cual finalizarán con la conexión misma.
+
+Se debe crear una regla de entrada en el puerto 3000 porque en caso de no hacerlo, es imposible acceder al equipo desde una máquina diferente, esta regla de puerto de entrada peremite esa comunicación mediante TCP,UDP o ICMP desde las 
+direcciones IP que se indiquen.
+
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
+
+Tamaño	1000000	1010000	1020000	1030000	1040000	1050000	1060000	1070000	1080000	1090000
+Tiempo (s)	21,65	22,25	22,77	23,21	23,72	24,2	24,58	25,1	26,4	27,03
+
+![](images/table1.png)
+
+![](images/table2.png)
+
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
