@@ -166,10 +166,11 @@ direcciones IP que se indiquen.
 
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
 
-Tamaño	1000000	1010000	1020000	1030000	1040000	1050000	1060000	1070000	1080000	1090000
-Tiempo (s)	21,65	22,25	22,77	23,21	23,72	24,2	24,58	25,1	26,4	27,03
+Tamaño B1ls:
 
 ![](images/table1.png)
+
+Tamaño B2ms:
 
 ![](images/table2.png)
 
