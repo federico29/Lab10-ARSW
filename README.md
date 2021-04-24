@@ -278,6 +278,10 @@ forever start FibonacciApp.js
 
 Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, sin embargo es importante que usted sepa que existen herramientas para aumatizar este proceso, entre ellas encontramos Azure Resource Manager, OsDisk Images, Terraform con Vagrant y Paker, Puppet, Ansible entre otras.
 
+Después de seguir los pasos se crearon los siguientes recursos:
+
+![](images/recursos-loadbalancer.png)
+
 #### Probar el resultado final de nuestra infraestructura
 
 1. Porsupuesto el endpoint de acceso a nuestro sistema será la IP pública del balanceador de carga, primero verifiquemos que los servicios básicos están funcionando, consuma los siguientes recursos:
@@ -286,6 +290,10 @@ Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, si
 http://52.155.223.248/
 http://52.155.223.248/fibonacci/1
 ```
+![](images/parte2punto1a.png)
+
+![](images/parte2punto1b.png)
+
 
 2. Realice las pruebas de carga con `newman` que se realizaron en la parte 1 y haga un informe comparativo donde contraste: tiempos de respuesta, cantidad de peticiones respondidas con éxito, costos de las 2 infraestrucruras, es decir, la que desarrollamos con balanceo de carga horizontal y la que se hizo con una maquina virtual escalada.
 
@@ -301,14 +309,56 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 **Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+
+**Tipos de balanceadores de carga**
+- Balanceador de carga público: Se utilizan para equilibrar la carga proveniente de internet a las máquinas virtuales, la dirección ip pública y el puerto del tráfico entrante son asignados a la dirección privada.
+- Balanceador de carga interno (privado): Se utiliza para equilibrar la carga del tráfico dentro de una red privada, solo utilizan ips privadas en la interfaz
+
+
+**Stock Keeping Unit (SKU):** Las unidades de mantenimiento de existencias son un código único asignado a un servicio en azure existen y representan la posibilidad para comprar existestencias. Existen varios tipos de sku
+entre ellos: estándar, componente, ensamblaje, paquete, colección y virtual.
+
+**¿Por qué el balanceador de carga necesita una IP pública?:** El balanceador de carga necesita una IP pública para poder cumplir con su función que es capturar el tráfico y distribuirlo correctamente entre los diferentes nodos de la red.
+
+
 * ¿Cuál es el propósito del *Backend Pool*?
+
+Backend Pool es un componente del balacenador de carga que define el grupo de recursos que brindarán tráfico para una Load Balancing Rule determinada, es un grupo de máquinas virtuales o instancias que atienden 
+las solicitudes entrantes. Para escalar de manera rentable y satisfacer grandes volúmenes de tráfico entrante, generalmente se recomienda agregar más instancias a este grupo.
+
 * ¿Cuál es el propósito del *Health Probe*?
+
+Cuando se configura un nuevo balanceador de carga se crea una Health probe que usará el balanceador para determinar si las instancias dentro del Backend Pool están en buen estado, si una instancia falla un determinado
+número de veces entonces esta dejará de dirigir tráfico hacia ella hasta que empiece a pasar las pruebas de estado nuevamente.
+
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+
+**Propósito de la Load Balancing Rule:** Una Load Balancing Rule de un Load Balancer se usa para definir la manera de distibuir el tráfico entrante a todas las instancias dentro del Backend Pool.
+
+**Tipos de sesión persistente:** Existen dos tipos de sesiones persistentes que son: None(Hash-based) y Client IP.
+
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+
+**Virtual network:** Es una tecnología de red que permite extender la red de área local sobre una red pública o no controlada (Internet). permite enviar y recibir datos sobre redes compartidas o públicas comportandose como 
+una red privada aprovechando la funcionalidad, seguridad y políticas de gestión de una red privada. se implementan realizando conexiones dedicadas y/o cifrado.
+
+**Subnet:** Es una segmentación de la red virtual (o cualquier red en general), permiten asignar una o varias subredes a la misma, estas subredes cuentan con un rango de direcciones apropiadas para una organización adecuada.
+
+**Address space:** Sirve para especificar un rango de direcciones ip privadas personalizadas. Azure asigna a los recursos de una red virtual una dirección IP privada desde el espacio de direcciones que asigne.
+
+**Address range:** Indica cuantas direcciones se tienen en un address space.
+
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
+
+**Availability Zones:** Son Ubicaciones geográficas únicas dentro de una región. Cada zona se compone de varios centros de datos equipados con alimentación, refrigeración y redes independientes.
+
+Seleccionamos 3 zonas de disponibilidad diferentes para poder tener una mejor disponibiliad y tolerancia a fallos dentro del sistema.
+
+**Zone-redundant:** Cuando utilizamos una ip zone-redundant azure separa física y lógicamente el gateway dentro de una region, lo cual permite mejorar la conectividad de la red privada.
+
 * ¿Cuál es el propósito del *Network Security Group*?
-* Informe de newman 1 (Punto 2)
-* Presente el Diagrama de Despliegue de la solución.
+
+Permite filtrar el tráfico hacia y desde los recursos en una red virtual de Azure, un grupo de seguridad permite definir reglas de entrada y salida que permitan o denieguen el tráfico de red entrante o saliente.
 
 
 
