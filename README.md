@@ -79,9 +79,6 @@ El tiempo promedio de respuesta es de 24,091 segundos
 	Resultados:
 	
 	![](images/newmanresults1.png)
-	
-	![](images/newmanresults2.png)
-	
 
 11. La cantidad de CPU consumida con peticiones concurrentes:
 
@@ -122,8 +119,6 @@ El tiempo promedio de respuesta es de 24,091 segundos
 	**Prueba II**: Carga concurrente. Siguen habiendo errores en algunas peticiones, pero el tiempo en que se atienden de disminuyó.
 	
 	![](images/newmanresults2-1.png)
-	
-	![](images/newmanresults2-2.png)
 	
 	* Uso de CPU:
 	
@@ -174,14 +169,49 @@ Tamaño B2ms:
 
 ![](images/table2.png)
 
+La función tarda mucho tiempo ya que se puede ver que hace siempre el proceso iterativo del cálculo de Fibonacci y no hace memorización.
+
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+
+Cada petición consume muchos recursos de la cpu debido a que el programa calcula el número de manera iterativa y no evita el recálculo de las operaciones.
+
+![](images/useofcpu.png)
+
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
-    * Tiempos de ejecución de cada petición.
-    * Si hubo fallos documentelos y explique.
+
+- El tiempo promedio de ejecución para cada petición fue de 26.7s y se recibió un total de 1020.52 KB de información.
+- Fallaron 5 peticiones concurrentes en la conexión debido a que el servidor no soporta concurrencia.
+
+![](images/newmanresults2-1.png)
+
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
+
+El tamaño B1ls tiene menos capacidad, es mucho más económico y solo está disponible para linux a diferencia de el tamaño B2ms. Sin embargo, ambas máquinas son de uso general, y proporcionan un uso equilibrado de la CPU, son utilizadas para entornos de desarrollo y pruebas, por lo general el tráfico soportado por estas es bajo/medio.
+
+**B1ls:**
+- 1 VCPU o núcleos
+- 0.5 GB de memoria RAM
+- 2 Discos de datos
+- Costo por mes: $4.56 USD
+
+**B2ms:**
+- 2 VCPU o núcleos
+- 8 GB de memoria RAM
+- 4 Discos de datos
+- Costo por mes: $72.85 USD
+
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
+
+Aumentar el tamaño de la máquina puede significar un consumo menor de recursos, pero no implica una mejora significativa en los tiempos de respuesta de las peticiones ni en la capacidad de respuesta concurrente del sistema. Al cambiar el tamaño de la VM el programa de Fibonacci sigue funcionando de igual manera, solo que el consumo que este genera sobre los recursos de la VM es menor.
+
 9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+
+Cuando se cambia el tamaño de la VM la infraestructura no estará disponible por cierto tiempo, ya que al cambiar el tamaño se debe reiniciar y puede tardar unos minutos. Con lo cual la disponibilidad del sistema se verá afectada y las peticiones realizadas durante ese tiempo no se atenderán.
+
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
+
+Si hubo mejora en el uso de CPU ya que el consumo con peticiones concurrentes pasó del 18% al 10% al hacer el cambio de tamaño, esto se debe a que se disponen de más recursos para hacer los cálculos. Por otra parte, los tiempos de respues disminuyeron muy poco, 4 segundos en promedio.
+
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
 
 ### Parte 2 - Escalabilidad horizontal
